@@ -1,0 +1,148 @@
+/* ازالة الحواوف والمساحات الخارجية */
+*{
+     padding: 0;
+     margin: 0;
+     font-family: sans-serif;
+}
+body{
+    /* دمج لونين في الخلفية */
+    background: linear-gradient(#111,#222);
+    /* الخلفية بطول الشاشة */
+    height: 100vh;
+    width: 100%;
+    /* عشان توسطن عنصر لازم تروح للأب بتاعه */
+    display: flex;
+    /* توسيط لمحور الافقي */
+    justify-content:  center;
+    /* توسيط للمحور الرأسي */
+    align-items: center;
+}
+/* يعني ضيف حاجة عليه */
+body::after{
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: red;
+    position: absolute;
+    /* عايزها تنزل تحت المربع بتاع الزجاج */
+    z-index: -1;
+    /* بترسملك حاجة */
+    /* نزول بمقدار ٧٠٪ */
+    clip-path: circle(50% at right 70%);
+}
+
+/* المربع الزجاجي */
+.container{
+    /* ٨٠٪ من حجم اللي يحتوي عليه يعني البدي */
+    height: 80%;
+    width: 80%;
+    background: rgba(255, 255, 255, 0.1);
+    /* انحناء الزوايا */
+    border-radius:  20px;
+    /* اي حاجة تطلع بره اخفيها */
+    overflow: hidden;
+}
+nav{
+    /* عشان افصل بينهم */
+    display: flex;
+    justify-content: space-between;
+    /* عشان يوسطنها */
+    align-items: center; 
+    width: 80%;
+    /* عشان اوسطن كل اللي جوه في المنتصف */
+    margin: auto;
+    /* مساحة خارجية علوية */
+    padding: 20px 0;
+
+}
+/* عشان استدعي حاجة جوة ال ناف */
+nav .logo{
+    color: #fff;
+    /* عشان ازيل الخط */
+    text-decoration: none;
+    font-size: 32px;
+    text-transform: uppercase; 
+    /* مسافة بين الحروف */
+    letter-spacing:  3px;
+    font-weight: 700;
+}
+nav ul li{
+    /* عشان يكونو جمب بعض */
+    /* in line block */
+     display: inline-block;
+     /* مساحات خارجية جانبية */
+     margin: 0 6px;
+     
+}
+nav ul li a{
+    color: #fff;
+    /* عشان امسح الخط اللي تحت */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+     
+}
+/* عشان لو وقفت عليها */
+nav ul li a:hover{
+    color: #e80202;
+}
+/* عشان اوسطن الصورة والكلام لازم استخدم الأب */
+.content{
+    display: flex ;
+    /* افصل بين الصورة والكلام */
+    justify-content: space-between;
+    /* خليها في المتنصف */
+    align-items: center;
+    height: 100%;
+    width: 80%;
+    margin: auto;
+}
+.content .text{
+    color: #fff;
+    width: 40%;
+
+}
+.content .text h2{
+    font-size:  40px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing:  2px;
+}
+.content .text p{
+    font-size: 18px;
+    /* المسافة بين الأسطر */
+    line-height: 25px;
+    margin: 10px 0;
+    letter-spacing: 1px;
+/* حيكون في فراغ 20% */
+}
+/* تنسيق ال ديف */
+.content .image{
+    width: 40%;
+
+}
+.content .image img{
+    width: 400px;
+}
+/* حديلك مقاسين لشاشة ما بين المقاس ده وده لما تكون كده اعمل التنسيق ده  */
+@media (min-width:950px) and (max-width:1150px){
+    .content .image img{
+        width: 330px;
+    }
+}
+@media(max-width:950px){
+
+    .content, nav{
+        /* عاوز المحتويات تيجي فوق بعض */
+        flex-direction: column;
+        /* الغي المسافة اللي بينهم */
+        justify-content: center;
+    }
+    .content .image , .content .text{
+        width: 100%;
+        
+    }
+    body::after{
+         clip-path: circle(50% at bottom );
+    }
+}
